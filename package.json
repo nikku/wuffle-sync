@@ -7,7 +7,7 @@
     "url": "https://github.com/nikku"
   },
   "license": "MIT",
-  "repository": "https://github.com/nikku/wuffle",
+  "repository": "https://github.com/nikku/wuffle-sync.git",
   "keywords": [
     "probot",
     "github",
@@ -21,6 +21,7 @@
     "test:watch": "jest --watch --notify --notifyMode=change --coverage"
   },
   "dependencies": {
+    "min-dash": "^3.4.0",
     "probot": "^7.2.0"
   },
   "devDependencies": {
@@ -44,7 +45,9 @@
       ".env",
       "."
     ],
-    "ignore": ["tmp/*"]
+    "ignore": [
+      "tmp/*"
+    ]
   },
   "jest": {
     "testEnvironment": "node"
