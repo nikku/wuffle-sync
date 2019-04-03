@@ -16,7 +16,12 @@ module.exports = app => {
     store.addIssue(issue);
   });
 
-  app.on('issues.closed', async ({ payload }) => {
+  app.on([
+    'issues.labeled',
+    'issues.unlabeled',
+    'issues.edited',
+    'issues.closed'
+  ], async ({ payload }) => {
     const { issue } = payload;
 
     store.replaceIssue(issue);
