@@ -6,7 +6,7 @@ const {
 describe('bot', function() {
 
 
-  it('should support basic flow', async function() {
+  it('should maintain store', async function() {
 
     // given
     const recording = loadRecording('repository-events');
@@ -19,35 +19,49 @@ describe('bot', function() {
 
     const { store } = app;
 
+    expect(store.getIssues({ title: 'TEST 1' })).toHaveLength(1);
+    expect(store.getIssues({ state: 'closed' })).toHaveLength(1);
+  });
 
-    const {
-      issues,
-      columns,
-      members,
-      labels,
-      milestones,
-      updates
-    } = store;
 
-    // updates = [
-    //   { type: 'issue', issue: ... }
-    // ]
+  describe('labels', function() {
 
-    // issues: latest mirror of GitHub issues
-    // contains labels, milestones, assignee, ...
+    it('should add label on <label.created>', async function() {
 
-    // columns (name, label)
+      // given
+      const recording = loadRecording('create-label');
 
-    // column config
-    const columns [
-      { name: 'Inbox', label: null  },
-      { name: 'Backlog', label: 'backlog' },
-      { name: 'Ready', label: 'ready' },
-      { name: 'In Progress', label: 'in progress' },
-      { name: 'Needs Review', label: 'needs review' },
-      { name: 'Done', label: null, closed: true },
-    ];
+      // when
+      await recording.replay();
 
+      // then
+      const { app } = recording;
+
+      const { store } = app;
+
+      expect(store.getLabels()).toHaveLength(1);
+    });
+
+  });
+
+
+  describe('milestones', function() {
+
+    it('should add milestone on <milestone.created>', async function() {
+
+      // given
+      const recording = loadRecording('create-milestone');
+
+      // when
+      await recording.replay();
+
+      // then
+      const { app } = recording;
+
+      const { store } = app;
+
+      expect(store.getMilestones()).toHaveLength(1);
+    });
 
   });
 
