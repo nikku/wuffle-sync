@@ -29,7 +29,9 @@ describe('Store', function() {
     // when
     const issue = {
       id: 'foo',
-      title: 'Foo'
+      title: 'Foo',
+      type: 'issue',
+      labels: []
     };
 
     store.addIssue(issue);
@@ -38,7 +40,10 @@ describe('Store', function() {
     const issues = store.getIssues();
 
     expect(issues).to.have.length(1);
-    expect(issues[0]).to.eql(issue);
+    expect(issues[0]).to.eql({
+      ...issue,
+      column: 'Inbox'
+    });
   });
 
 
@@ -47,7 +52,9 @@ describe('Store', function() {
     // given
     const issue = {
       id: 'foo',
-      title: 'Foo'
+      title: 'Foo',
+      type: 'issue',
+      labels: []
     };
 
     store.addIssue(issue);
@@ -65,12 +72,18 @@ describe('Store', function() {
     // given
     const issue = {
       id: 'foo',
-      title: 'Foo'
+      title: 'Foo',
+      type: 'issue',
+      labels: []
     };
 
     const updatedIssue = {
       id: 'foo',
-      title: 'Bar'
+      title: 'Bar',
+      type: 'issue',
+      labels: [
+        { name: 'in progress' }
+      ]
     };
 
     store.addIssue(issue);
@@ -83,6 +96,7 @@ describe('Store', function() {
 
     expect(store.getIssues()).to.have.length(1);
     expect(issues[0].title).to.eql('Bar');
+    expect(issues[0].column).to.eql('In Progress');
   });
 
 
@@ -91,12 +105,16 @@ describe('Store', function() {
     // given
     const issue1 = {
       id: 'foo',
-      title: 'Foo'
+      title: 'Foo',
+      type: 'issue',
+      labels: []
     };
 
     const issue2 = {
       id: 'bar',
-      title: 'Bar'
+      title: 'Bar',
+      type: 'pull-request',
+      labels: []
     };
 
     store.addIssue(issue1);
@@ -110,7 +128,10 @@ describe('Store', function() {
 
     // then
     expect(issues).to.have.length(1);
-    expect(issues[0]).to.eql(issue1);
+    expect(issues[0]).to.eql({
+      ...issue1,
+      column: 'Inbox'
+    });
   });
 
 
@@ -119,12 +140,16 @@ describe('Store', function() {
     // given
     const issue1 = {
       id: 'foo',
-      title: 'Foo'
+      title: 'Foo',
+      type: 'pull-request',
+      labels: []
     };
 
     const issue2 = {
       id: 'bar',
-      title: 'Bar'
+      title: 'Bar',
+      type: 'issue',
+      labels: []
     };
 
     store.addIssue(issue1);
