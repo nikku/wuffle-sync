@@ -22,8 +22,10 @@ describe('bot', function() {
 
     const { store } = app;
 
-    expect(store.getIssues({ title: 'TEST 1' })).to.have.length(1);
-    expect(store.getIssues({ state: 'closed' })).to.have.length(1);
+    expect(store.getIssues()).to.have.length(2);
+
+    expect(store.getIssue({ type: 'issue', number: 40, title: 'TEST 1', state: 'closed' })).to.exist;
+    expect(store.getIssue({ type: 'pull-request', number: 41, state: 'closed' })).to.exist;
   });
 
 
@@ -38,12 +40,33 @@ describe('bot', function() {
     // then
     const { app } = recording;
 
-
     const { store } = app;
 
     const issue = store.getIssue({ number: 44 });
 
     expect(issue).to.exist;
+    expect(issue.type).to.eql('issue');
+  });
+
+
+  it('should handle PR life-cycle events', async function() {
+
+    // given
+    const recording = loadRecording('pull-request-events');
+
+    // when
+    await recording.replay();
+
+    // then
+    const { app } = recording;
+
+
+    const { store } = app;
+
+    const issue = store.getIssue({ number: 48 });
+
+    expect(issue).to.exist;
+    expect(issue.type).to.eql('pull-request');
   });
 
 
