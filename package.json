@@ -6,7 +6,6 @@
     "name": "Nico Rehwaldt",
     "url": "https://github.com/nikku"
   },
-  "main": "lib/index.js",
   "license": "MIT",
   "repository": "https://github.com/nikku/wuffle-sync.git",
   "keywords": [
