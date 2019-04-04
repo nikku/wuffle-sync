@@ -1,5 +1,7 @@
 # wuffle-sync
 
+[![Build Status](https://travis-ci.com/nikku/wuffle-sync.svg?branch=master)](https://travis-ci.com/nikku/wuffle-sync)
+
 > A GitHub App built with [Probot](https://github.com/probot/probot) that synchronizes your wuffle board.
 
 ## Setup
