@@ -19,7 +19,7 @@
     "dev": "nodemon",
     "start": "probot run ./index.js",
     "lint": "eslint .",
-    "test": "mocha test",
+    "test": "mocha test --exit",
     "test:watch": "npm test -- --watch"
   },
   "dependencies": {
