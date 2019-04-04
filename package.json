@@ -6,6 +6,7 @@
     "name": "Nico Rehwaldt",
     "url": "https://github.com/nikku"
   },
+  "main": "lib/index.js",
   "license": "MIT",
   "repository": "https://github.com/nikku/wuffle-sync.git",
   "keywords": [
@@ -14,29 +15,33 @@
     "probot-app"
   ],
   "scripts": {
+    "all": "run-s lint test",
     "dev": "nodemon",
     "start": "probot run ./index.js",
-    "lint": "standard --fix",
-    "test": "jest",
-    "test:watch": "jest --watch --notify --notifyMode=change --coverage"
+    "lint": "eslint .",
+    "test": "mocha test",
+    "test:watch": "npm test -- --watch"
   },
   "dependencies": {
     "min-dash": "^3.4.0",
     "probot": "^7.2.0"
   },
   "devDependencies": {
-    "jest": "^24.0.0",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-bpmn-io": "^0.7.0",
+    "mocha": "^6.0.2",
     "nock": "^10.0.0",
     "nodemon": "^1.17.2",
-    "smee-client": "^1.0.2",
-    "standard": "^12.0.1"
+    "npm-run-all": "^4.1.5",
+    "smee-client": "^1.0.2"
   },
   "engines": {
     "node": ">= 8.3.0"
   },
   "standard": {
     "env": [
-      "jest"
+      "mocha"
     ]
   },
   "nodemonConfig": {
@@ -48,8 +53,5 @@
     "ignore": [
       "tmp/*"
     ]
-  },
-  "jest": {
-    "testEnvironment": "node"
   }
 }

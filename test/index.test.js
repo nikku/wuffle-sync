@@ -1,10 +1,13 @@
 const {
+  expect
+} = require('chai');
+
+const {
   loadRecording
 } = require('./recording');
 
 
 describe('bot', function() {
-
 
   it('should maintain store', async function() {
 
@@ -19,8 +22,28 @@ describe('bot', function() {
 
     const { store } = app;
 
-    expect(store.getIssues({ title: 'TEST 1' })).toHaveLength(1);
-    expect(store.getIssues({ state: 'closed' })).toHaveLength(1);
+    expect(store.getIssues({ title: 'TEST 1' })).to.have.length(1);
+    expect(store.getIssues({ state: 'closed' })).to.have.length(1);
+  });
+
+
+  it('should handle issue life-cycle events', async function() {
+
+    // given
+    const recording = loadRecording('issue-events');
+
+    // when
+    await recording.replay();
+
+    // then
+    const { app } = recording;
+
+
+    const { store } = app;
+
+    const issue = store.getIssue({ number: 44 });
+
+    expect(issue).to.exist;
   });
 
 
@@ -39,7 +62,7 @@ describe('bot', function() {
 
       const { store } = app;
 
-      expect(store.getLabels()).toHaveLength(1);
+      expect(store.getLabels()).to.have.length(1);
     });
 
   });
@@ -60,7 +83,7 @@ describe('bot', function() {
 
       const { store } = app;
 
-      expect(store.getMilestones()).toHaveLength(1);
+      expect(store.getMilestones()).to.have.length(1);
     });
 
   });

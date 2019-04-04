@@ -1,4 +1,9 @@
-const Store = require('../lib/Store');
+const {
+  expect
+} = require('chai');
+
+const Store = require('../lib/store');
+
 
 describe('Store', function() {
 
@@ -6,11 +11,11 @@ describe('Store', function() {
 
   beforeEach(function() {
     store = new Store();
-  })
+  });
 
 
   it('should add issue', function() {
-    
+
     // when
     const issue = {
       id: 'foo',
@@ -22,13 +27,13 @@ describe('Store', function() {
     // then
     const issues = store.getIssues();
 
-    expect(issues).toHaveLength(1);
-    expect(issues[0]).toBe(issue);
+    expect(issues).to.have.length(1);
+    expect(issues[0]).to.eql(issue);
   });
 
 
   it('should remove issue', function() {
-    
+
     // given
     const issue = {
       id: 'foo',
@@ -41,16 +46,16 @@ describe('Store', function() {
     store.removeIssue(issue);
 
     // then
-    expect(store.getIssues()).toHaveLength(0);
+    expect(store.getIssues()).to.have.length(0);
   });
 
 
   it('should replace issue', function() {
-    
+
     // given
     const issue = {
-        id: 'foo',
-        title: 'Foo'
+      id: 'foo',
+      title: 'Foo'
     };
 
     const updatedIssue = {
@@ -66,8 +71,8 @@ describe('Store', function() {
     // then
     const issues = store.getIssues({ id: 'foo' });
 
-    expect(store.getIssues()).toHaveLength(1);
-    expect(issues[0].title).toBe('Bar');
+    expect(store.getIssues()).to.have.length(1);
+    expect(issues[0].title).to.eql('Bar');
   });
 
 
@@ -88,14 +93,42 @@ describe('Store', function() {
     store.addIssue(issue2);
 
     // assume
-    expect(store.getIssues()).toHaveLength(2);
-    
+    expect(store.getIssues()).to.have.length(2);
+
     // when
     const issues = store.getIssues({ id: 'foo' });
 
     // then
-    expect(issues).toHaveLength(1);
-    expect(issues[0]).toBe(issue1);
+    expect(issues).to.have.length(1);
+    expect(issues[0]).to.eql(issue1);
+  });
+
+
+  it('should get single issue (filter)', function() {
+
+    // given
+    const issue1 = {
+      id: 'foo',
+      title: 'Foo'
+    };
+
+    const issue2 = {
+      id: 'bar',
+      title: 'Bar'
+    };
+
+    store.addIssue(issue1);
+    store.addIssue(issue2);
+
+    // assume
+    expect(store.getIssues()).to.have.length(2);
+
+    // when
+    const issue = store.getIssue({ id: 'foo' });
+
+    // then
+    expect(issue).to.exist;
+    expect(issue.id).to.eql('foo');
   });
 
 });
