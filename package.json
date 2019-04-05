@@ -22,6 +22,7 @@
     "test:watch": "npm test -- --watch"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "min-dash": "^3.4.0",
     "probot": "^7.2.0"
   },
