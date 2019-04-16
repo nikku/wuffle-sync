@@ -31,6 +31,7 @@
     "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-plugin-bpmn-io": "^0.7.0",
+    "express-session": "^1.15.6",
     "mocha": "^6.0.2",
     "nock": "^10.0.0",
     "nodemon": "^1.17.2",
