@@ -16,10 +16,10 @@ npm start
 
 ## Contributing
 
-If you have suggestions for how wuffle-sync could be improved, or want to report a bug, [open an issue](./issues/new)! We'd love all and any contributions.
+Please file your improvement ideas and bug reports to the [wuffle bug tracker](https://github.com/nikku/wuffle/issues/new).
 
 
-## See also
+## See Also
 
 * [wuffle](https://github.com/nikku/wuffle) - the front-end app for this synchronization bot
 
