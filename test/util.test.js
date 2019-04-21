@@ -17,12 +17,6 @@ const {
 } = linkTypes;
 
 
-const repo = {
-  owner: 'DEFAULT_OWNER',
-  repo: 'DEFAULT_REPO'
-};
-
-
 describe.only('util', function() {
 
   describe('findLinks', function() {
@@ -47,17 +41,16 @@ describe.only('util', function() {
       // then
       expect(links).to.eql([
         {
-          type: REQUIRES, number: 1, ...repo
+          type: REQUIRES, number: 1
         },
         {
-          type: REQUIRES, number: 2, ...repo
+          type: REQUIRES, number: 2
         },
         {
-          type: REQUIRES, number: 3, ...repo
+          type: REQUIRES, number: 3
         },
         {
-          type: REQUIRES, number: 4,
-          ...repo
+          type: REQUIRES, number: 4
         },
         {
           type: REQUIRES, number: 5,
@@ -95,13 +88,13 @@ describe.only('util', function() {
       // then
       expect(links).to.eql([
         {
-          type: REQUIRED_BY, number: 1, ...repo
+          type: REQUIRED_BY, number: 1
         },
         {
-          type: REQUIRED_BY, number: 2, ...repo
+          type: REQUIRED_BY, number: 2
         },
         {
-          type: REQUIRED_BY, number: 3, ...repo
+          type: REQUIRED_BY, number: 3
         },
         {
           type: REQUIRED_BY, number: 5,
@@ -139,13 +132,13 @@ describe.only('util', function() {
       // then
       expect(links).to.eql([
         {
-          type: CLOSES, number: 1, ...repo
+          type: CLOSES, number: 1
         },
         {
-          type: CLOSES, number: 2, ...repo
+          type: CLOSES, number: 2
         },
         {
-          type: CLOSES, number: 3, ...repo
+          type: CLOSES, number: 3
         },
         {
           type: CLOSES, number: 5,
@@ -177,7 +170,7 @@ describe.only('util', function() {
       // then
       expect(links).to.eql([
         {
-          type: RELATED_TO, number: 2, ...repo
+          type: RELATED_TO, number: 2
         },
         {
           type: RELATED_TO, number: 1828,
@@ -201,10 +194,10 @@ describe.only('util', function() {
       // then
       expect(links).to.eql([
         {
-          type: CHILD_OF, number: 1, ...repo
+          type: CHILD_OF, number: 1
         },
         {
-          type: PARENT_OF, number: 2, ...repo
+          type: PARENT_OF, number: 2
         },
         {
           type: PARENT_OF, number: 1828,
@@ -227,7 +220,7 @@ describe.only('util', function() {
 
       // then
       expect(links).to.eql([
-        { type: PARENT_OF, number: 2, ...repo }
+        { type: PARENT_OF, number: 2 }
       ]);
 
     });
@@ -247,8 +240,8 @@ describe.only('util', function() {
 
       // then
       expect(links).to.eql([
-        { type: PARENT_OF, number: 2, ...repo },
-        { type: RELATED_TO, number: 12, ...repo }
+        { type: PARENT_OF, number: 2 },
+        { type: RELATED_TO, number: 12 }
       ]);
 
     });
@@ -261,19 +254,11 @@ describe.only('util', function() {
 // helpers /////////////////////////
 
 
-function createIssue(title, body, repository) {
-
-  repository = repository || {
-    name: repo.repo,
-    owner: {
-      login: repo.owner
-    }
-  };
+function createIssue(title, body) {
 
   return {
     title,
-    body,
-    repository
+    body
   };
 
 }
