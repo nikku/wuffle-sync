@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "all": "run-s lint test",
-    "dev": "nodemon",
+    "dev": "cross-env NODE_ENV=development nodemon",
     "start": "probot run ./index.js",
     "lint": "eslint .",
     "test": "cross-env NODE_ENV=test mocha test --exit",
