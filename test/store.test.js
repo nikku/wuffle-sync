@@ -5,7 +5,7 @@ const {
 const Store = require('../lib/store');
 
 
-describe('Store', function() {
+describe.skip('Store', function() {
 
   let store;
 

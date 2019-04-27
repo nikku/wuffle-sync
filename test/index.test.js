@@ -7,7 +7,7 @@ const {
 } = require('./recording');
 
 
-describe('bot', function() {
+describe.skip('bot', function() {
 
   it('should maintain store', async function() {
 
