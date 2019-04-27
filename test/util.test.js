@@ -4,7 +4,8 @@ const {
 
 const {
   findLinks,
-  linkTypes
+  linkTypes,
+  parseSearch
 } = require('../lib/util');
 
 const {
@@ -17,7 +18,7 @@ const {
 } = linkTypes;
 
 
-describe.only('util', function() {
+describe('util', function() {
 
   describe('findLinks', function() {
 
@@ -242,6 +243,37 @@ describe.only('util', function() {
       expect(links).to.eql([
         { type: PARENT_OF, number: 2 },
         { type: RELATED_TO, number: 12 }
+      ]);
+
+    });
+
+  });
+
+
+  describe('parseSearch', function() {
+
+    it('should parse terms', function() {
+
+      const searchString = [
+        'is:open',
+        'asdsad',
+        'milestone:"FOO BAR"',
+        '"FOO BAR"',
+        'milestone:12asd',
+        'label:"in progress"'
+      ].join(' ');
+
+      // when
+      const search = parseSearch(searchString);
+
+      // then
+      expect(search).to.eql([
+        { qualifier: 'is', value: 'open' },
+        { qualifier: 'text', value: 'asdsad' },
+        { qualifier: 'milestone', value: 'FOO BAR' },
+        { qualifier: 'text', value: 'FOO BAR' },
+        { qualifier: 'milestone', value: '12asd' },
+        { qualifier: 'label', value: 'in progress' }
       ]);
 
     });
