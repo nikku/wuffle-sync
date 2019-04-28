@@ -260,6 +260,7 @@ describe('util', function() {
         'milestone:"FOO BAR"',
         '"FOO BAR"',
         'milestone:12asd',
+        'milestone:',
         'label:"in progress"'
       ].join(' ');
 
@@ -273,6 +274,7 @@ describe('util', function() {
         { qualifier: 'milestone', value: 'FOO BAR' },
         { qualifier: 'text', value: 'FOO BAR' },
         { qualifier: 'milestone', value: '12asd' },
+        { qualifier: 'milestone', value: undefined },
         { qualifier: 'label', value: 'in progress' }
       ]);
 
